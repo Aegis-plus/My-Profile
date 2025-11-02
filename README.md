@@ -1,0 +1,2 @@
+# Disclaimer
+This site was initially developed using the capabilities of the 'Create Anything' AI. While the basic structure is complete, I recognize that the source code may not be fully optimized. I welcome collaborative efforts from experienced developers. If you possess the skills to refine and optimize this code, please contact me directly via Discord, my username available there. All professional contributions are deeply valued.
