@@ -2,11 +2,12 @@
 	"name": "web",
 	"private": true,
 	"type": "module",
+	"homepage": "https://Aegis-plus.github.io/My-Profile",
 	"scripts": {
 		"dev": "react-router dev",
 		"typecheck": "react-router typegen && tsc --noEmit",
 		"build": "react-router build",
-		"start": "node build/server/index.js"
+		"deploy": "gh-pages -d build"
 	},
 	"dependencies": {
 		"@auth/core": "^0.37.2",
@@ -83,6 +84,7 @@
 		"autoprefixer": "^10.4.21",
 		"babel-plugin-react-require": "^4.0.3",
 		"fast-glob": "^3.3.3",
+		"gh-pages": "^6.3.0",
 		"jsdom": "^26.1.0",
 		"micromatch": "^4.0.8",
 		"postcss": "^8.5.3",
