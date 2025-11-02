@@ -13,7 +13,6 @@ import { toast, Toaster } from 'sonner';
 import { create } from 'zustand';
 import { useIdleTimer } from 'react-idle-timer';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import _JSXStyle from 'styled-jsx/style.js';
 import fg from 'fast-glob';
 import 'node:async_hooks';
 import 'node:console';
@@ -567,9 +566,7 @@ const queryClient = new QueryClient({
     }
   }
 });
-function RootLayout({
-  children
-}) {
+function RootLayout({ children }) {
   return /* @__PURE__ */ jsx(QueryClientProvider, { client: queryClient, children });
 }
 
@@ -610,46 +607,57 @@ function HomePage() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const pixelArtGallery = [{
-    id: 1,
-    title: "Cat",
-    url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/Catto.gif",
-    description: "A Simple cat animation"
-  }, {
-    id: 2,
-    title: "Duck",
-    url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/Duck.png",
-    description: "Wild Duck Appears"
-  }, {
-    id: 3,
-    title: "Fruit",
-    url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/Fruit.png",
-    description: "Bunch of fruits"
-  }, {
-    id: 4,
-    title: "Halloween Pumpkin",
-    url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/Labu-Plonga-Plongo.gif",
-    description: "Yet another simple animation of pumpkin"
-  }, {
-    id: 5,
-    title: "Space Marine",
-    url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/SpaceMarine.png",
-    description: "Adeptus Astartes"
-  }, {
-    id: 6,
-    title: "Strike Freedom Gundam",
-    url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/Strike%20Freedom%20Helmet.png",
-    description: "Yet, another Cool Helmet. but it's Gundam!"
-  }];
+  const pixelArtGallery = [
+    {
+      id: 1,
+      title: "Cat",
+      url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/Catto.gif",
+      description: "A Simple cat animation"
+    },
+    {
+      id: 2,
+      title: "Duck",
+      url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/Duck.png",
+      description: "Wild Duck Appears"
+    },
+    {
+      id: 3,
+      title: "Fruit",
+      url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/Fruit.png",
+      description: "Bunch of fruits"
+    },
+    {
+      id: 4,
+      title: "Halloween Pumpkin",
+      url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/Labu-Plonga-Plongo.gif",
+      description: "Yet another simple animation of pumpkin"
+    },
+    {
+      id: 5,
+      title: "Space Marine",
+      url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/SpaceMarine.png",
+      description: "Adeptus Astartes"
+    },
+    {
+      id: 6,
+      title: "Strike Freedom Gundam",
+      url: "https://raw.githubusercontent.com/Aegis-plus/My-Profile/refs/heads/main/img/Strike%20Freedom%20Helmet.png",
+      description: "Yet, another Cool Helmet. but it's Gundam!"
+    }
+  ];
   const goToNextArt = () => {
     if (!selectedArt) return;
-    const currentIndex = pixelArtGallery.findIndex((art) => art.id === selectedArt.id);
+    const currentIndex = pixelArtGallery.findIndex(
+      (art) => art.id === selectedArt.id
+    );
     const nextIndex = (currentIndex + 1) % pixelArtGallery.length;
     setSelectedArt(pixelArtGallery[nextIndex]);
   };
   const goToPreviousArt = () => {
     if (!selectedArt) return;
-    const currentIndex = pixelArtGallery.findIndex((art) => art.id === selectedArt.id);
+    const currentIndex = pixelArtGallery.findIndex(
+      (art) => art.id === selectedArt.id
+    );
     const previousIndex = (currentIndex - 1 + pixelArtGallery.length) % pixelArtGallery.length;
     setSelectedArt(pixelArtGallery[previousIndex]);
   };
@@ -666,360 +674,565 @@ function HomePage() {
   const textColor = isDarkMode ? darkText : lightText;
   const cardColor = isDarkMode ? darkCard : lightCard;
   const borderColor = isDarkMode ? darkBorder : lightBorder;
-  return /* @__PURE__ */ jsxs("div", { style: {
-    minHeight: "100vh",
-    backgroundColor: bgColor,
-    color: textColor,
-    fontSize: "18px",
-    transition: "background-color 0.3s ease, color 0.3s ease"
-  }, className: "jsx-1495997836 font-pixelify-sans", children: [
-    /* @__PURE__ */ jsxs("header", { style: {
-      padding: "20px",
-      borderBottom: `2px solid ${borderColor}`,
-      textAlign: "center",
-      position: "relative"
-    }, className: "jsx-1495997836", children: [
-      /* @__PURE__ */ jsx("h1", { style: {
-        fontSize: "48px",
-        margin: "0",
-        color: accentColor,
-        textShadow: "2px 2px 0px #003300"
-      }, className: "jsx-1495997836", children: "Aegis+" }),
-      /* @__PURE__ */ jsx("p", { style: {
-        margin: "10px 0 0 0",
-        color: isDarkMode ? "#888" : "#666",
-        fontSize: "16px"
-      }, className: "jsx-1495997836", children: "Casual Gamer • Pixel Artist • Digital Creator" }),
-      /* @__PURE__ */ jsxs("button", { onClick: () => setIsDarkMode(!isDarkMode), style: {
-        position: "absolute",
-        top: "20px",
-        right: "20px",
-        backgroundColor: isDarkMode ? "#333" : "#e0e0e0",
-        border: `2px solid ${accentColor}`,
-        padding: "8px 12px",
-        borderRadius: "20px",
-        cursor: "pointer",
-        fontSize: "16px",
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        transition: "all 0.3s ease"
-      }, onMouseEnter: (e) => {
-        e.target.style.transform = "scale(1.05)";
-      }, onMouseLeave: (e) => {
-        e.target.style.transform = "scale(1)";
-      }, className: "jsx-1495997836", children: [
-        /* @__PURE__ */ jsx("span", { className: "jsx-1495997836", children: isDarkMode ? "🌙" : "☀️" }),
-        /* @__PURE__ */ jsx("div", { style: {
-          width: "24px",
-          height: "12px",
-          backgroundColor: accentColor,
-          borderRadius: "6px",
-          position: "relative"
-        }, className: "jsx-1495997836", children: /* @__PURE__ */ jsx("div", { style: {
-          width: "10px",
-          height: "10px",
-          backgroundColor: isDarkMode ? "#333" : "#e0e0e0",
-          borderRadius: "50%",
-          position: "absolute",
-          top: "1px",
-          left: isDarkMode ? "1px" : "13px",
-          transition: "left 0.3s ease"
-        }, className: "jsx-1495997836" }) })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxs("div", { style: {
-      maxWidth: "900px",
-      margin: "0 auto",
-      padding: "20px"
-    }, className: "jsx-1495997836", children: [
-      /* @__PURE__ */ jsxs("section", { style: {
-        marginBottom: "60px"
-      }, className: "jsx-1495997836", children: [
-        /* @__PURE__ */ jsx("h2", { style: {
-          fontSize: "32px",
-          color: accentColor,
-          marginBottom: "20px",
-          borderBottom: `1px solid ${borderColor}`,
-          paddingBottom: "10px"
-        }, className: "jsx-1495997836", children: "About Me" }),
-        /* @__PURE__ */ jsxs("div", { style: {
-          backgroundColor: cardColor,
-          color: textColor,
-          padding: "30px",
-          border: `1px solid ${borderColor}`,
-          borderRadius: "12px",
-          lineHeight: "1.6",
-          transition: "background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease"
-        }, className: "jsx-1495997836", children: [
-          /* @__PURE__ */ jsxs("p", { style: {
-            marginBottom: "20px"
-          }, className: "jsx-1495997836", children: [
-            /* @__PURE__ */ jsx("strong", { className: "jsx-1495997836", children: "Hey there! 👋 I'm Aegis!" }),
-            /* @__PURE__ */ jsx("br", { className: "jsx-1495997836" }),
-            "I'm a ",
-            /* @__PURE__ */ jsx("strong", { className: "jsx-1495997836", children: "casual gamer" }),
-            " who absolutely lives for",
-            " ",
-            /* @__PURE__ */ jsx("strong", { className: "jsx-1495997836", children: "RPGs" }),
-            " and other popular",
-            " ",
-            /* @__PURE__ */ jsx("strong", { className: "jsx-1495997836", children: "single-player" }),
-            " adventures. Recently, though, I stumbled upon a super fun new hobby: ",
-            /* @__PURE__ */ jsx("strong", { className: "jsx-1495997836", children: "Drawing" }),
-            ", especially ",
-            /* @__PURE__ */ jsx("strong", { className: "jsx-1495997836", children: "Pixel Art" }),
-            "! I've completely fallen for it—I was so hooked that last month I finally started learning how to draw it myself, and my journey to level up my skills officially began! 🎨"
+  return /* @__PURE__ */ jsxs(
+    "div",
+    {
+      style: {
+        minHeight: "100vh",
+        backgroundColor: bgColor,
+        color: textColor,
+        fontSize: "18px",
+        transition: "background-color 0.3s ease, color 0.3s ease"
+      },
+      className: "font-pixelify-sans",
+      children: [
+        /* @__PURE__ */ jsxs(
+          "header",
+          {
+            style: {
+              padding: "20px",
+              borderBottom: `2px solid ${borderColor}`,
+              textAlign: "center",
+              position: "relative"
+            },
+            children: [
+              /* @__PURE__ */ jsx(
+                "h1",
+                {
+                  style: {
+                    fontSize: "48px",
+                    margin: "0",
+                    color: accentColor,
+                    textShadow: "2px 2px 0px #003300"
+                  },
+                  children: "Aegis+"
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "p",
+                {
+                  style: {
+                    margin: "10px 0 0 0",
+                    color: isDarkMode ? "#888" : "#666",
+                    fontSize: "16px"
+                  },
+                  children: "Casual Gamer • Pixel Artist • Digital Creator"
+                }
+              ),
+              /* @__PURE__ */ jsxs(
+                "button",
+                {
+                  onClick: () => setIsDarkMode(!isDarkMode),
+                  style: {
+                    position: "absolute",
+                    top: "20px",
+                    right: "20px",
+                    backgroundColor: isDarkMode ? "#333" : "#e0e0e0",
+                    border: `2px solid ${accentColor}`,
+                    padding: "8px 12px",
+                    borderRadius: "20px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    transition: "all 0.3s ease"
+                  },
+                  onMouseEnter: (e) => {
+                    e.target.style.transform = "scale(1.05)";
+                  },
+                  onMouseLeave: (e) => {
+                    e.target.style.transform = "scale(1)";
+                  },
+                  children: [
+                    /* @__PURE__ */ jsx("span", { children: isDarkMode ? "🌙" : "☀️" }),
+                    /* @__PURE__ */ jsx(
+                      "div",
+                      {
+                        style: {
+                          width: "24px",
+                          height: "12px",
+                          backgroundColor: accentColor,
+                          borderRadius: "6px",
+                          position: "relative"
+                        },
+                        children: /* @__PURE__ */ jsx(
+                          "div",
+                          {
+                            style: {
+                              width: "10px",
+                              height: "10px",
+                              backgroundColor: isDarkMode ? "#333" : "#e0e0e0",
+                              borderRadius: "50%",
+                              position: "absolute",
+                              top: "1px",
+                              left: isDarkMode ? "1px" : "13px",
+                              transition: "left 0.3s ease"
+                            }
+                          }
+                        )
+                      }
+                    )
+                  ]
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxs("div", { style: { maxWidth: "900px", margin: "0 auto", padding: "20px" }, children: [
+          /* @__PURE__ */ jsxs("section", { style: { marginBottom: "60px" }, children: [
+            /* @__PURE__ */ jsx(
+              "h2",
+              {
+                style: {
+                  fontSize: "32px",
+                  color: accentColor,
+                  marginBottom: "20px",
+                  borderBottom: `1px solid ${borderColor}`,
+                  paddingBottom: "10px"
+                },
+                children: "About Me"
+              }
+            ),
+            /* @__PURE__ */ jsxs(
+              "div",
+              {
+                style: {
+                  backgroundColor: cardColor,
+                  color: textColor,
+                  padding: "30px",
+                  border: `1px solid ${borderColor}`,
+                  borderRadius: "12px",
+                  lineHeight: "1.6",
+                  transition: "background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease"
+                },
+                children: [
+                  /* @__PURE__ */ jsxs("p", { style: { marginBottom: "20px" }, children: [
+                    /* @__PURE__ */ jsx("strong", { children: "Hey there! 👋 I'm Aegis!" }),
+                    /* @__PURE__ */ jsx("br", {}),
+                    "I'm a ",
+                    /* @__PURE__ */ jsx("strong", { children: "casual gamer" }),
+                    " who absolutely lives for",
+                    " ",
+                    /* @__PURE__ */ jsx("strong", { children: "RPGs" }),
+                    " and other popular",
+                    " ",
+                    /* @__PURE__ */ jsx("strong", { children: "single-player" }),
+                    " adventures. Recently, though, I stumbled upon a super fun new hobby: ",
+                    /* @__PURE__ */ jsx("strong", { children: "Drawing" }),
+                    ", especially ",
+                    /* @__PURE__ */ jsx("strong", { children: "Pixel Art" }),
+                    "! I've completely fallen for it—I was so hooked that last month I finally started learning how to draw it myself, and my journey to level up my skills officially began! 🎨"
+                  ] }),
+                  /* @__PURE__ */ jsx("p", { style: { marginBottom: "20px" }, children: "I'm also kicking off another little side project focusing on servers, and this site (or whatever you're looking at!) is one piece of that puzzle." }),
+                  /* @__PURE__ */ jsxs("p", { style: { margin: "0" }, children: [
+                    /* @__PURE__ */ jsx("strong", { children: "Thanks a ton for stopping by!" }),
+                    " I really hope you enjoy exploring. Happy browsing! 😄"
+                  ] })
+                ]
+              }
+            )
           ] }),
-          /* @__PURE__ */ jsx("p", { style: {
-            marginBottom: "20px"
-          }, className: "jsx-1495997836", children: "I'm also kicking off another little side project focusing on servers, and this site (or whatever you're looking at!) is one piece of that puzzle." }),
-          /* @__PURE__ */ jsxs("p", { style: {
-            margin: "0"
-          }, className: "jsx-1495997836", children: [
-            /* @__PURE__ */ jsx("strong", { className: "jsx-1495997836", children: "Thanks a ton for stopping by!" }),
-            " I really hope you enjoy exploring. Happy browsing! 😄"
+          /* @__PURE__ */ jsxs("section", { style: { marginBottom: "60px" }, children: [
+            /* @__PURE__ */ jsx(
+              "h2",
+              {
+                style: {
+                  fontSize: "32px",
+                  color: accentColor,
+                  marginBottom: "20px",
+                  borderBottom: `1px solid ${borderColor}`,
+                  paddingBottom: "10px"
+                },
+                children: "Pixel Art Gallery"
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              "div",
+              {
+                style: {
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                  gap: "20px",
+                  marginBottom: "20px"
+                },
+                children: pixelArtGallery.map((art) => /* @__PURE__ */ jsxs(
+                  "div",
+                  {
+                    style: {
+                      backgroundColor: cardColor,
+                      border: `1px solid ${borderColor}`,
+                      padding: "15px",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      borderRadius: "12px"
+                    },
+                    onMouseEnter: (e) => {
+                      e.currentTarget.style.borderColor = accentColor;
+                      e.currentTarget.style.backgroundColor = isDarkMode ? "#2a2a2a" : "#f0f0f0";
+                    },
+                    onMouseLeave: (e) => {
+                      e.currentTarget.style.borderColor = borderColor;
+                      e.currentTarget.style.backgroundColor = cardColor;
+                    },
+                    onClick: () => setSelectedArt(art),
+                    children: [
+                      /* @__PURE__ */ jsx(
+                        "img",
+                        {
+                          src: art.url,
+                          alt: art.title,
+                          style: {
+                            width: "100%",
+                            height: "200px",
+                            objectFit: "cover",
+                            imageRendering: "pixelated",
+                            border: `1px solid ${borderColor}`,
+                            marginBottom: "10px"
+                          }
+                        }
+                      ),
+                      /* @__PURE__ */ jsx(
+                        "h3",
+                        {
+                          style: {
+                            fontSize: "20px",
+                            margin: "0 0 5px 0",
+                            color: accentColor
+                          },
+                          children: art.title
+                        }
+                      ),
+                      /* @__PURE__ */ jsx(
+                        "p",
+                        {
+                          style: {
+                            margin: "0",
+                            color: isDarkMode ? "#888" : "#666",
+                            fontSize: "14px"
+                          },
+                          children: art.description
+                        }
+                      )
+                    ]
+                  },
+                  art.id
+                ))
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              "p",
+              {
+                style: {
+                  textAlign: "center",
+                  color: isDarkMode ? "#888" : "#666",
+                  fontStyle: "italic"
+                },
+                children: "Click on any artwork to view it larger"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxs("section", { children: [
+            /* @__PURE__ */ jsx(
+              "h2",
+              {
+                style: {
+                  fontSize: "32px",
+                  color: accentColor,
+                  marginBottom: "20px",
+                  borderBottom: `1px solid ${borderColor}`,
+                  paddingBottom: "10px"
+                },
+                children: "Get In Touch"
+              }
+            ),
+            /* @__PURE__ */ jsxs(
+              "div",
+              {
+                style: {
+                  backgroundColor: cardColor,
+                  color: textColor,
+                  padding: "30px",
+                  border: `1px solid ${borderColor}`,
+                  borderRadius: "12px",
+                  transition: "background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease"
+                },
+                children: [
+                  /* @__PURE__ */ jsx("p", { style: { marginBottom: "20px" }, children: "Hey there! I'm still an amateur at pixel art, but if you're interested in a simple commission, I would genuinely be thrilled to help! I promise I won't charge you for straightforward requests :D. I'm also a huge gamer! If you ever want to add me, chat about games, or just find someone to play with, please feel free—my digital door is always wide open!" }),
+                  /* @__PURE__ */ jsxs(
+                    "div",
+                    {
+                      style: {
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "15px"
+                      },
+                      children: [
+                        /* @__PURE__ */ jsxs(
+                          "div",
+                          {
+                            style: { display: "flex", alignItems: "center", gap: "10px" },
+                            children: [
+                              /* @__PURE__ */ jsx("span", { style: { color: accentColor, minWidth: "80px" }, children: "Email:" }),
+                              /* @__PURE__ */ jsx(
+                                "a",
+                                {
+                                  href: "mailto:starfallaegis@gmail.com",
+                                  style: {
+                                    color: isDarkMode ? "#888" : "#666",
+                                    textDecoration: "none"
+                                  },
+                                  onMouseEnter: (e) => e.target.style.color = accentColor,
+                                  onMouseLeave: (e) => e.target.style.color = isDarkMode ? "#888" : "#666",
+                                  children: "starfallaegis@gmail.com"
+                                }
+                              )
+                            ]
+                          }
+                        ),
+                        /* @__PURE__ */ jsxs(
+                          "div",
+                          {
+                            style: { display: "flex", alignItems: "center", gap: "10px" },
+                            children: [
+                              /* @__PURE__ */ jsx("span", { style: { color: accentColor, minWidth: "80px" }, children: "Discord:" }),
+                              /* @__PURE__ */ jsx("span", { style: { color: isDarkMode ? "#888" : "#666" }, children: "@aegis-plus" })
+                            ]
+                          }
+                        ),
+                        /* @__PURE__ */ jsxs(
+                          "div",
+                          {
+                            style: { display: "flex", alignItems: "center", gap: "10px" },
+                            children: [
+                              /* @__PURE__ */ jsx("span", { style: { color: accentColor, minWidth: "80px" }, children: "Steam:" }),
+                              /* @__PURE__ */ jsx(
+                                "a",
+                                {
+                                  href: "https://steamcommunity.com/id/AegisPlus/",
+                                  target: "_blank",
+                                  rel: "noopener noreferrer",
+                                  style: {
+                                    color: isDarkMode ? "#888" : "#666",
+                                    textDecoration: "none"
+                                  },
+                                  onMouseEnter: (e) => e.target.style.color = accentColor,
+                                  onMouseLeave: (e) => e.target.style.color = isDarkMode ? "#888" : "#666",
+                                  children: "@Aegis+"
+                                }
+                              )
+                            ]
+                          }
+                        )
+                      ]
+                    }
+                  )
+                ]
+              }
+            )
           ] })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxs("section", { style: {
-        marginBottom: "60px"
-      }, className: "jsx-1495997836", children: [
-        /* @__PURE__ */ jsx("h2", { style: {
-          fontSize: "32px",
-          color: accentColor,
-          marginBottom: "20px",
-          borderBottom: `1px solid ${borderColor}`,
-          paddingBottom: "10px"
-        }, className: "jsx-1495997836", children: "Pixel Art Gallery" }),
-        /* @__PURE__ */ jsx("div", { style: {
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: "20px",
-          marginBottom: "20px"
-        }, className: "jsx-1495997836", children: pixelArtGallery.map((art) => /* @__PURE__ */ jsxs("div", { style: {
-          backgroundColor: cardColor,
-          border: `1px solid ${borderColor}`,
-          padding: "15px",
-          cursor: "pointer",
-          transition: "all 0.3s ease",
-          borderRadius: "12px"
-        }, onMouseEnter: (e) => {
-          e.currentTarget.style.borderColor = accentColor;
-          e.currentTarget.style.backgroundColor = isDarkMode ? "#2a2a2a" : "#f0f0f0";
-        }, onMouseLeave: (e) => {
-          e.currentTarget.style.borderColor = borderColor;
-          e.currentTarget.style.backgroundColor = cardColor;
-        }, onClick: () => setSelectedArt(art), className: "jsx-1495997836", children: [
-          /* @__PURE__ */ jsx("img", { src: art.url, alt: art.title, style: {
-            width: "100%",
-            height: "200px",
-            objectFit: "cover",
-            imageRendering: "pixelated",
-            border: `1px solid ${borderColor}`,
-            marginBottom: "10px"
-          }, className: "jsx-1495997836" }),
-          /* @__PURE__ */ jsx("h3", { style: {
-            fontSize: "20px",
-            margin: "0 0 5px 0",
-            color: accentColor
-          }, className: "jsx-1495997836", children: art.title }),
-          /* @__PURE__ */ jsx("p", { style: {
-            margin: "0",
-            color: isDarkMode ? "#888" : "#666",
-            fontSize: "14px"
-          }, className: "jsx-1495997836", children: art.description })
-        ] }, art.id)) }),
-        /* @__PURE__ */ jsx("p", { style: {
-          textAlign: "center",
-          color: isDarkMode ? "#888" : "#666",
-          fontStyle: "italic"
-        }, className: "jsx-1495997836", children: "Click on any artwork to view it larger" })
-      ] }),
-      /* @__PURE__ */ jsxs("section", { className: "jsx-1495997836", children: [
-        /* @__PURE__ */ jsx("h2", { style: {
-          fontSize: "32px",
-          color: accentColor,
-          marginBottom: "20px",
-          borderBottom: `1px solid ${borderColor}`,
-          paddingBottom: "10px"
-        }, className: "jsx-1495997836", children: "Get In Touch" }),
-        /* @__PURE__ */ jsxs("div", { style: {
-          backgroundColor: cardColor,
-          color: textColor,
-          padding: "30px",
-          border: `1px solid ${borderColor}`,
-          borderRadius: "12px",
-          transition: "background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease"
-        }, className: "jsx-1495997836", children: [
-          /* @__PURE__ */ jsx("p", { style: {
-            marginBottom: "20px"
-          }, className: "jsx-1495997836", children: "Hey there! I'm still an amateur at pixel art, but if you're interested in a simple commission, I would genuinely be thrilled to help! I promise I won't charge you for straightforward requests :D. I'm also a huge gamer! If you ever want to add me, chat about games, or just find someone to play with, please feel free—my digital door is always wide open!" }),
-          /* @__PURE__ */ jsxs("div", { style: {
-            display: "flex",
-            flexDirection: "column",
-            gap: "15px"
-          }, className: "jsx-1495997836", children: [
-            /* @__PURE__ */ jsxs("div", { style: {
+        ] }),
+        selectedArt && /* @__PURE__ */ jsx(
+          "div",
+          {
+            style: {
+              position: "fixed",
+              top: "0",
+              left: "0",
+              right: "0",
+              bottom: "0",
+              backgroundColor: "rgba(0, 0, 0, 0.9)",
               display: "flex",
               alignItems: "center",
-              gap: "10px"
-            }, className: "jsx-1495997836", children: [
-              /* @__PURE__ */ jsx("span", { style: {
-                color: accentColor,
-                minWidth: "80px"
-              }, className: "jsx-1495997836", children: "Email:" }),
-              /* @__PURE__ */ jsx("a", { href: "mailto:starfallaegis@gmail.com", style: {
-                color: isDarkMode ? "#888" : "#666",
-                textDecoration: "none"
-              }, onMouseEnter: (e) => e.target.style.color = accentColor, onMouseLeave: (e) => e.target.style.color = isDarkMode ? "#888" : "#666", className: "jsx-1495997836", children: "starfallaegis@gmail.com" })
-            ] }),
-            /* @__PURE__ */ jsxs("div", { style: {
+              justifyContent: "center",
+              zIndex: "1000",
+              padding: "20px"
+            },
+            onClick: () => setSelectedArt(null),
+            children: /* @__PURE__ */ jsxs(
+              "div",
+              {
+                style: {
+                  backgroundColor: cardColor,
+                  border: `2px solid ${accentColor}`,
+                  padding: "30px",
+                  maxWidth: "90vw",
+                  maxHeight: "90vh",
+                  textAlign: "center",
+                  position: "relative",
+                  overflow: "auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  transition: "background-color 0.3s ease"
+                },
+                onClick: (e) => e.stopPropagation(),
+                children: [
+                  /* @__PURE__ */ jsx(
+                    "img",
+                    {
+                      src: selectedArt.url,
+                      alt: selectedArt.title,
+                      style: {
+                        maxWidth: "100%",
+                        maxHeight: "70vh",
+                        imageRendering: "pixelated",
+                        marginBottom: "20px"
+                      }
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    "h3",
+                    {
+                      style: {
+                        fontSize: "28px",
+                        margin: "0 0 10px 0",
+                        color: accentColor
+                      },
+                      children: selectedArt.title
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    "p",
+                    {
+                      style: {
+                        margin: "0 0 15px 0",
+                        color: isDarkMode ? "#888" : "#666",
+                        fontSize: "16px"
+                      },
+                      children: selectedArt.description
+                    }
+                  ),
+                  /* @__PURE__ */ jsxs("div", { style: { display: "flex", gap: "10px" }, children: [
+                    /* @__PURE__ */ jsx(
+                      "button",
+                      {
+                        onClick: goToPreviousArt,
+                        style: {
+                          backgroundColor: isDarkMode ? "#333" : "#eee",
+                          color: accentColor,
+                          border: `1px solid ${accentColor}`,
+                          padding: "10px 15px",
+                          cursor: "pointer",
+                          fontFamily: "monospace",
+                          transition: "all 0.3s ease"
+                        },
+                        onMouseEnter: (e) => {
+                          e.target.style.backgroundColor = accentColor;
+                          e.target.style.color = "#000";
+                        },
+                        onMouseLeave: (e) => {
+                          e.target.style.backgroundColor = isDarkMode ? "#333" : "#eee";
+                          e.target.style.color = accentColor;
+                        },
+                        children: "← Previous"
+                      }
+                    ),
+                    /* @__PURE__ */ jsx(
+                      "button",
+                      {
+                        onClick: () => setSelectedArt(null),
+                        style: {
+                          backgroundColor: isDarkMode ? "#333" : "#eee",
+                          color: accentColor,
+                          border: `1px solid ${accentColor}`,
+                          padding: "10px 20px",
+                          cursor: "pointer",
+                          fontFamily: "monospace",
+                          transition: "all 0.3s ease"
+                        },
+                        onMouseEnter: (e) => {
+                          e.target.style.backgroundColor = accentColor;
+                          e.target.style.color = "#000";
+                        },
+                        onMouseLeave: (e) => {
+                          e.target.style.backgroundColor = isDarkMode ? "#333" : "#eee";
+                          e.target.style.color = accentColor;
+                        },
+                        children: "Close"
+                      }
+                    ),
+                    /* @__PURE__ */ jsx(
+                      "button",
+                      {
+                        onClick: goToNextArt,
+                        style: {
+                          backgroundColor: isDarkMode ? "#333" : "#eee",
+                          color: accentColor,
+                          border: `1px solid ${accentColor}`,
+                          padding: "10px 15px",
+                          cursor: "pointer",
+                          fontFamily: "monospace",
+                          transition: "all 0.3s ease"
+                        },
+                        onMouseEnter: (e) => {
+                          e.target.style.backgroundColor = accentColor;
+                          e.target.style.color = "#000";
+                        },
+                        onMouseLeave: (e) => {
+                          e.target.style.backgroundColor = isDarkMode ? "#333" : "#eee";
+                          e.target.style.color = accentColor;
+                        },
+                        children: "Next →"
+                      }
+                    )
+                  ] })
+                ]
+              }
+            )
+          }
+        ),
+        showScrollTop && /* @__PURE__ */ jsx(
+          "button",
+          {
+            onAnimationEnd: handleAnimationEnd,
+            style: {
+              position: "fixed",
+              bottom: "20px",
+              right: "20px",
+              backgroundColor: accentColor,
+              color: "#000",
+              border: "none",
+              borderRadius: "50%",
+              width: "50px",
+              height: "50px",
               display: "flex",
               alignItems: "center",
-              gap: "10px"
-            }, className: "jsx-1495997836", children: [
-              /* @__PURE__ */ jsx("span", { style: {
-                color: accentColor,
-                minWidth: "80px"
-              }, className: "jsx-1495997836", children: "Discord:" }),
-              /* @__PURE__ */ jsx("span", { style: {
-                color: isDarkMode ? "#888" : "#666"
-              }, className: "jsx-1495997836", children: "@aegis-plus" })
-            ] }),
-            /* @__PURE__ */ jsxs("div", { style: {
-              display: "flex",
-              alignItems: "center",
-              gap: "10px"
-            }, className: "jsx-1495997836", children: [
-              /* @__PURE__ */ jsx("span", { style: {
-                color: accentColor,
-                minWidth: "80px"
-              }, className: "jsx-1495997836", children: "Steam:" }),
-              /* @__PURE__ */ jsx("a", { href: "https://steamcommunity.com/id/AegisPlus/", target: "_blank", rel: "noopener noreferrer", style: {
-                color: isDarkMode ? "#888" : "#666",
-                textDecoration: "none"
-              }, onMouseEnter: (e) => e.target.style.color = accentColor, onMouseLeave: (e) => e.target.style.color = isDarkMode ? "#888" : "#666", className: "jsx-1495997836", children: "@Aegis+" })
-            ] })
-          ] })
-        ] })
-      ] })
-    ] }),
-    selectedArt && /* @__PURE__ */ jsx("div", { style: {
-      position: "fixed",
-      top: "0",
-      left: "0",
-      right: "0",
-      bottom: "0",
-      backgroundColor: "rgba(0, 0, 0, 0.9)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: "1000",
-      padding: "20px"
-    }, onClick: () => setSelectedArt(null), className: "jsx-1495997836", children: /* @__PURE__ */ jsxs("div", { style: {
-      backgroundColor: cardColor,
-      border: `2px solid ${accentColor}`,
-      padding: "30px",
-      maxWidth: "90vw",
-      maxHeight: "90vh",
-      textAlign: "center",
-      position: "relative",
-      overflow: "auto",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      transition: "background-color 0.3s ease"
-    }, onClick: (e) => e.stopPropagation(), className: "jsx-1495997836", children: [
-      /* @__PURE__ */ jsx("img", { src: selectedArt.url, alt: selectedArt.title, style: {
-        maxWidth: "100%",
-        maxHeight: "70vh",
-        imageRendering: "pixelated",
-        marginBottom: "20px"
-      }, className: "jsx-1495997836" }),
-      /* @__PURE__ */ jsx("h3", { style: {
-        fontSize: "28px",
-        margin: "0 0 10px 0",
-        color: accentColor
-      }, className: "jsx-1495997836", children: selectedArt.title }),
-      /* @__PURE__ */ jsx("p", { style: {
-        margin: "0 0 15px 0",
-        color: isDarkMode ? "#888" : "#666",
-        fontSize: "16px"
-      }, className: "jsx-1495997836", children: selectedArt.description }),
-      /* @__PURE__ */ jsxs("div", { style: {
-        display: "flex",
-        gap: "10px"
-      }, className: "jsx-1495997836", children: [
-        /* @__PURE__ */ jsx("button", { onClick: goToPreviousArt, style: {
-          backgroundColor: isDarkMode ? "#333" : "#eee",
-          color: accentColor,
-          border: `1px solid ${accentColor}`,
-          padding: "10px 15px",
-          cursor: "pointer",
-          fontFamily: "monospace",
-          transition: "all 0.3s ease"
-        }, onMouseEnter: (e) => {
-          e.target.style.backgroundColor = accentColor;
-          e.target.style.color = "#000";
-        }, onMouseLeave: (e) => {
-          e.target.style.backgroundColor = isDarkMode ? "#333" : "#eee";
-          e.target.style.color = accentColor;
-        }, className: "jsx-1495997836", children: "← Previous" }),
-        /* @__PURE__ */ jsx("button", { onClick: () => setSelectedArt(null), style: {
-          backgroundColor: isDarkMode ? "#333" : "#eee",
-          color: accentColor,
-          border: `1px solid ${accentColor}`,
-          padding: "10px 20px",
-          cursor: "pointer",
-          fontFamily: "monospace",
-          transition: "all 0.3s ease"
-        }, onMouseEnter: (e) => {
-          e.target.style.backgroundColor = accentColor;
-          e.target.style.color = "#000";
-        }, onMouseLeave: (e) => {
-          e.target.style.backgroundColor = isDarkMode ? "#333" : "#eee";
-          e.target.style.color = accentColor;
-        }, className: "jsx-1495997836", children: "Close" }),
-        /* @__PURE__ */ jsx("button", { onClick: goToNextArt, style: {
-          backgroundColor: isDarkMode ? "#333" : "#eee",
-          color: accentColor,
-          border: `1px solid ${accentColor}`,
-          padding: "10px 15px",
-          cursor: "pointer",
-          fontFamily: "monospace",
-          transition: "all 0.3s ease"
-        }, onMouseEnter: (e) => {
-          e.target.style.backgroundColor = accentColor;
-          e.target.style.color = "#000";
-        }, onMouseLeave: (e) => {
-          e.target.style.backgroundColor = isDarkMode ? "#333" : "#eee";
-          e.target.style.color = accentColor;
-        }, className: "jsx-1495997836", children: "Next →" })
-      ] })
-    ] }) }),
-    showScrollTop && /* @__PURE__ */ jsx("button", { onAnimationEnd: handleAnimationEnd, style: {
-      position: "fixed",
-      bottom: "20px",
-      right: "20px",
-      backgroundColor: accentColor,
-      color: "#000",
-      border: "none",
-      borderRadius: "50%",
-      width: "50px",
-      height: "50px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      cursor: "pointer",
-      zIndex: "1000",
-      animation: isAnimatingOut ? "popOut 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards" : "popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)"
-    }, onClick: scrollToTop, className: "jsx-1495997836", children: /* @__PURE__ */ jsx("span", { style: {
-      fontSize: "24px",
-      fontWeight: "bold"
-    }, className: "jsx-1495997836", children: "↑" }) }),
-    /* @__PURE__ */ jsx(_JSXStyle, { id: "1495997836", children: ["@-webkit-keyframes popIn{from{-webkit-transform:scale(0) rotate(-180deg);-ms-transform:scale(0) rotate(-180deg);transform:scale(0) rotate(-180deg);opacity:0;}to{-webkit-transform:scale(1) rotate(0deg);-ms-transform:scale(1) rotate(0deg);transform:scale(1) rotate(0deg);opacity:1;}}", "@keyframes popIn{from{-webkit-transform:scale(0) rotate(-180deg);-ms-transform:scale(0) rotate(-180deg);transform:scale(0) rotate(-180deg);opacity:0;}to{-webkit-transform:scale(1) rotate(0deg);-ms-transform:scale(1) rotate(0deg);transform:scale(1) rotate(0deg);opacity:1;}}", "@-webkit-keyframes popOut{from{-webkit-transform:scale(1) rotate(0deg);-ms-transform:scale(1) rotate(0deg);transform:scale(1) rotate(0deg);opacity:1;}to{-webkit-transform:scale(0) rotate(-180deg);-ms-transform:scale(0) rotate(-180deg);transform:scale(0) rotate(-180deg);opacity:0;}}", "@keyframes popOut{from{-webkit-transform:scale(1) rotate(0deg);-ms-transform:scale(1) rotate(0deg);transform:scale(1) rotate(0deg);opacity:1;}to{-webkit-transform:scale(0) rotate(-180deg);-ms-transform:scale(0) rotate(-180deg);transform:scale(0) rotate(-180deg);opacity:0;}}"] })
-  ] });
+              justifyContent: "center",
+              cursor: "pointer",
+              zIndex: "1000",
+              animation: isAnimatingOut ? "popOut 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards" : "popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)"
+            },
+            onClick: scrollToTop,
+            children: /* @__PURE__ */ jsx("span", { style: { fontSize: "24px", fontWeight: "bold" }, children: "↑" })
+          }
+        ),
+        /* @__PURE__ */ jsx("style", { jsx: true, global: true, children: `
+        @keyframes popIn {
+          from {
+            transform: scale(0) rotate(-180deg);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+          }
+        }
+
+        @keyframes popOut {
+          from {
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+          }
+          to {
+            transform: scale(0) rotate(-180deg);
+            opacity: 0;
+          }
+        }
+      ` })
+      ]
+    }
+  );
 }
 
 const page = UNSAFE_withComponentProps(function WrappedPage(props) {
@@ -1238,7 +1451,7 @@ const route2 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   loader
 }, Symbol.toStringTag, { value: 'Module' }));
 
-const serverManifest = {'entry':{'module':'/assets/entry.client-BAZVAT42.js','imports':['/assets/chunk-UIGDSWPH-C9B0A0en.js','/assets/index-wpv8WFMF.js'],'css':[]},'routes':{'root':{'id':'root','parentId':undefined,'path':'','index':undefined,'caseSensitive':undefined,'hasAction':false,'hasLoader':false,'hasClientAction':false,'hasClientLoader':false,'hasClientMiddleware':false,'hasErrorBoundary':true,'module':'/assets/root-Dh8OoV_J.js','imports':['/assets/chunk-UIGDSWPH-C9B0A0en.js','/assets/index-wpv8WFMF.js','/assets/index-yF3fMKpO.js'],'css':['/assets/root-Coc1wC6S.css'],'clientActionModule':undefined,'clientLoaderModule':undefined,'clientMiddlewareModule':undefined,'hydrateFallbackModule':undefined},'page':{'id':'page','parentId':'root','path':undefined,'index':true,'caseSensitive':undefined,'hasAction':false,'hasLoader':false,'hasClientAction':false,'hasClientLoader':false,'hasClientMiddleware':false,'hasErrorBoundary':false,'module':'/assets/page-DWp0chHN.js','imports':['/assets/index-yF3fMKpO.js','/assets/chunk-UIGDSWPH-C9B0A0en.js'],'css':[],'clientActionModule':undefined,'clientLoaderModule':undefined,'clientMiddlewareModule':undefined,'hydrateFallbackModule':undefined},'__create/not-found':{'id':'__create/not-found','parentId':'root','path':'*?','index':undefined,'caseSensitive':undefined,'hasAction':false,'hasLoader':true,'hasClientAction':false,'hasClientLoader':false,'hasClientMiddleware':false,'hasErrorBoundary':false,'module':'/assets/not-found-ONVX1Aky.js','imports':['/assets/index-yF3fMKpO.js','/assets/chunk-UIGDSWPH-C9B0A0en.js'],'css':[],'clientActionModule':undefined,'clientLoaderModule':undefined,'clientMiddlewareModule':undefined,'hydrateFallbackModule':undefined}},'url':'/assets/manifest-d778364c.js','version':'d778364c','sri':undefined};
+const serverManifest = {'entry':{'module':'/assets/entry.client-BAZVAT42.js','imports':['/assets/chunk-UIGDSWPH-C9B0A0en.js','/assets/index-wpv8WFMF.js'],'css':[]},'routes':{'root':{'id':'root','parentId':undefined,'path':'','index':undefined,'caseSensitive':undefined,'hasAction':false,'hasLoader':false,'hasClientAction':false,'hasClientLoader':false,'hasClientMiddleware':false,'hasErrorBoundary':true,'module':'/assets/root-Dh8OoV_J.js','imports':['/assets/chunk-UIGDSWPH-C9B0A0en.js','/assets/index-wpv8WFMF.js','/assets/index-yF3fMKpO.js'],'css':['/assets/root-Coc1wC6S.css'],'clientActionModule':undefined,'clientLoaderModule':undefined,'clientMiddlewareModule':undefined,'hydrateFallbackModule':undefined},'page':{'id':'page','parentId':'root','path':undefined,'index':true,'caseSensitive':undefined,'hasAction':false,'hasLoader':false,'hasClientAction':false,'hasClientLoader':false,'hasClientMiddleware':false,'hasErrorBoundary':false,'module':'/assets/page-BHrqW16M.js','imports':['/assets/index-yF3fMKpO.js','/assets/chunk-UIGDSWPH-C9B0A0en.js'],'css':[],'clientActionModule':undefined,'clientLoaderModule':undefined,'clientMiddlewareModule':undefined,'hydrateFallbackModule':undefined},'__create/not-found':{'id':'__create/not-found','parentId':'root','path':'*?','index':undefined,'caseSensitive':undefined,'hasAction':false,'hasLoader':true,'hasClientAction':false,'hasClientLoader':false,'hasClientMiddleware':false,'hasErrorBoundary':false,'module':'/assets/not-found-ONVX1Aky.js','imports':['/assets/index-yF3fMKpO.js','/assets/chunk-UIGDSWPH-C9B0A0en.js'],'css':[],'clientActionModule':undefined,'clientLoaderModule':undefined,'clientMiddlewareModule':undefined,'hydrateFallbackModule':undefined}},'url':'/assets/manifest-46f5f491.js','version':'46f5f491','sri':undefined};
 
 const assetsBuildDirectory = "build\\client";
       const basename = "/";
